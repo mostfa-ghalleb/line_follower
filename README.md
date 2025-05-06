@@ -185,6 +185,79 @@ bool_params = {
 }
 ```
 
+### Workflow Diagrams
+
+The following diagrams illustrate the workflows of the main program (main.py) and frame processing (vision.py’s process_frame), rendered directly in GitHub using Mermaid.
+
+Main Workflow (main.py)
+
+This shows the program flow from initialization to video processing.
+```mermaid
+graph TD
+    A[Start] --> B[Init Camera: cv2.VideoCapture]
+    B -->|Success| C[Connect Arduino: arduino.py]
+    C -->|Success| D[Setup Video Writer: output.mp4]
+    D --> E[Load Config: config.py]
+    E --> F[Calibrate Black Line: calibration.py]
+    F -->|Save black.json| G[Calibrate Green Marker: calibration.py]
+    G -->|Save green.json| H{Video Capture Loop}
+    H -->|Read Frame| I[Validate Frame: Not None]
+    I -->|Valid| J[Process Frame: vision.process_frame]
+    J --> K[Generate Debug Grid: debug.debug_choice]
+    K --> L[Display Debug Grid: cv2.imshow]
+    L --> M[Write Debug Grid to Video]
+    M --> N[Send Commands to Arduino]
+    N --> O{Key Press?}
+    O -->|ESC| P[Release Camera and Video Writer]
+    P --> Q[Close Windows: cv2.destroyAllWindows]
+    Q --> R[End]
+    O -->|Continue| H
+    B -->|Camera Fail| R
+    C -->|Arduino Fail| R
+    I -->|Invalid Frame| O
+```
+Process Frame Workflow (vision.py)
+
+This details frame processing, including navigation logic.
+```mermaid
+graph TD
+    A[Start: process_frame] --> B[Extract ROI: Crop frame]
+    B --> C[Threshold Black Line: black.json]
+    C --> D[Erode Image: Remove noise]
+    D --> E[Dilate Image: Enhance lines]
+    E --> F[Find Contours: cv2.findContours]
+    F --> G[Filter by Area: MIN_CONTOUR_AREA]
+    G --> H[Filter by Intensity: MAX_INTENSITY]
+    H --> I[Filter by Y-Position: Optional]
+    I --> J[Select Main Contour: dx]
+    J --> K[Segment Contours: NUM_SEGMENTS]
+    K --> L[Filter Segments by Area]
+    L --> M[Filter Segments by Intensity]
+    M --> N[Threshold Green Markers: green.json]
+    N --> O[Find Green Contours]
+    O --> P[Compute LMR Points: Left, Mid, Right]
+    P --> Q[Navigation Logic: navigation.py]
+    Q --> R[Calculate dr, dl: Right, Left Distances]
+    R --> S[Compute Weights: w, wnext]
+    S --> T[Calculate Error: Weighted Difference]
+    T --> U[Check Green Contours for Junctions]
+    U -->|Green Detected| V[Measure Rectangle Width]
+    V --> W{Width > MAX_RECT_WIDTH?}
+    W -->|Yes| X[Determine Junction Type]
+    X --> Y{Type?}
+    Y -->|Right| Z[Set Response: JR]
+    Y -->|Left| AA[Set Response: JL]
+    Y -->|U-Turn| AB[Set Response: U]
+    W -->|No| AC[Set Response: PID:<error>]
+    U -->|No Green| AC
+    Z --> AD[Update State: response, prev_left, prev_right]
+    AA --> AD
+    AB --> AD
+    AC --> AD
+    AD --> AE[Generate Debug Images: bool_params]
+    AE --> AF[Return Debug Data: params, data_params]
+    AF --> AG[End]
+```
 ## Troubleshooting
 
 ### Camera Issues
