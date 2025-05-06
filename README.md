@@ -27,7 +27,7 @@ The robot uses OpenCV to process video frames, detecting black lines (main path)
 Clone or download the project to your local machine:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/mostfa-ghalleb/line_follower.git
 cd line_follower
 ```
 
