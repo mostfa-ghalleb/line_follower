@@ -1,0 +1,26 @@
+# Python virtual environment
+venv/
+.env/
+env/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Output files
+output.mp4
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.log
+*.tmp
+*.swp
+
+# Sensitive or local configuration
+*.local
+*.env

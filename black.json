@@ -1,0 +1,49 @@
+{
+    "THRESHOLD": {
+        "thresh": 30,
+        "max_val": 255
+    },
+    "RGB": {
+        "r_low": 0,
+        "r_high": 255,
+        "g_low": 0,
+        "g_high": 255,
+        "b_low": 0,
+        "b_high": 255
+    },
+    "HSV": {
+        "h_low": 141,
+        "h_high": 179,
+        "s_low": 79,
+        "s_high": 255,
+        "v_low": 0,
+        "v_high": 255
+    },
+    "LAB": {
+        "l_low": 0,
+        "l_high": 255,
+        "a_low": 0,
+        "a_high": 255,
+        "b_low": 0,
+        "b_high": 255
+    },
+    "YCRCB": {
+        "y_low": 0,
+        "y_high": 255,
+        "cr_low": 0,
+        "cr_high": 255,
+        "cb_low": 0,
+        "cb_high": 255
+    },
+    "ADAPTIVE_THRESHOLD": {
+        "block_size": 11,
+        "c": 2,
+        "method": 1,
+        "thresh_type": 1
+    },
+    "CANNY_EDGE": {
+        "threshold1": 50,
+        "threshold2": 150,
+        "aperture_size": 3
+    }
+}
