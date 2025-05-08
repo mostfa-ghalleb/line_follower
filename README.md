@@ -4,7 +4,7 @@ This project implements a line-following robot using computer vision to detect b
 
 ## Project Overview
 
-The robot uses OpenCV to process video frames, detecting black lines (main path) and green markers (junctions). A calibration system allows tuning for different lighting conditions, and a debug grid visualizes processing steps (e.g., ROI, contours, green lines). Commands are sent to an Arduino to control motors based on navigation decisions.
+The robot uses OpenCV to process video frames, detecting black lines (main path) and green markers (junctions) . A calibration system allows tuning for different lighting conditions, and a debug grid visualizes processing steps (e.g., ROI, contours, green lines). Commands are sent to an Arduino to control motors based on navigation decisions.
 
 ## Prerequisites
 
