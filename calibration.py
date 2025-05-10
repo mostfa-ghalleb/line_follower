@@ -331,7 +331,7 @@ class Calibrator:
         if self._suppress_ui:
             return
         
-        cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+        cap = cv2.VideoCapture(0, cv2.CAP_V4L2) # change to cap = cv2.VideoCapture(0) in windows  
         self.backup_settings = self.settings.copy()
         
         while True:

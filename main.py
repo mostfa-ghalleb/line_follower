@@ -17,7 +17,7 @@ def main() -> None:
     black.calibrate()
     print("Black calibration completed.")
     
-    cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+    cap = cv2.VideoCapture(0, cv2.CAP_V4L2) #change to  cap = cv2.VideoCapture(0)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     
     ser = connect_to_arduino()

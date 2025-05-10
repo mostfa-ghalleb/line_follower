@@ -59,6 +59,12 @@ pip install opencv-python pyserial numpy
 - `pyserial`: For Arduino communication.
 - `numpy`: For array operations.
 
+### IMPROTANT NOTES FOR WINDOWS USERS
+```bash
+cap = cv2.VideoCapture(0) instead of cap = cv2.VideoCapture(0, cv2.CAP_V4L2) for raspberry pi 5 
+uncomment line 20 in main.py 
+uncomment line 334 in calibration.py 
+```
 ### 4. Set Up the Arduino
 1. **Connect the Arduino**: Plug your Arduino into a USB port.
 2. **Upload Arduino Code**: Use the Arduino IDE to upload motor control code (not included here). The code should read serial commands (e.g., `PID:<error>`, `JR`, `JL`, `U`) and control motors accordingly.
@@ -352,3 +358,6 @@ This project is unlicensed. Use it at your own discretion.
 ---
 
 *Last updated: May 2025*
+
+
+
